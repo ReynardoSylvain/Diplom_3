@@ -33,16 +33,12 @@ def register_new_user_and_return_user_data():
         'name': name
     }
 
-    print(f"\n[REGISTRATION REQUEST] Email: {email}, Password: {password}, Name: {name}")
 
     response = requests.post(Urls.CREATE_USER_HANDLE, data=acc_details)
 
-    print(f"[REGISTRATION RESPONSE] Status Code: {response.status_code}")
-    print(f"[REGISTRATION RESPONSE] Text: {response.text}")
 
     try:
         json_response = response.json()
-        print(f"[REGISTRATION RESPONSE] JSON: {json.dumps(json_response, indent=4)}")
         if response.status_code == 200:
             user_data = {
                 'email': email,
@@ -52,7 +48,6 @@ def register_new_user_and_return_user_data():
                 'json': json_response
             }
     except json.JSONDecodeError:
-        print("[REGISTRATION RESPONSE] Failed to decode JSON response")
         user_data = {
             'email': email,
             'password': password,
